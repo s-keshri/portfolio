@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Shivam Keshri — Data Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --serif:'DM Serif Display',Georgia,serif;
+    --sans:'DM Sans',system-ui,sans-serif;
+    --ink:#111110;
+    --ink2:#5a5955;
+    --ink3:#9a9893;
+    --line:#e8e6e0;
+    --bg:#fafaf8;
+    --surface:#ffffff;
+    --accent:#1a1a18;
+    --tag-bg:#f0ede6;
+    --tag-ink:#4a4843;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+
+  nav{position:sticky;top:0;z-index:100;background:rgba(250,250,248,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:0 2rem}
+  .nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+  .nav-logo{font-family:var(--serif);font-size:1.15rem;letter-spacing:-.01em;color:var(--ink);text-decoration:none}
+  .nav-links{display:flex;gap:2rem;list-style:none}
+  .nav-links a{font-size:.85rem;font-weight:500;color:var(--ink2);text-decoration:none;letter-spacing:.04em;text-transform:uppercase;transition:color .2s}
+  .nav-links a:hover{color:var(--ink)}
+
+  .container{max-width:1100px;margin:0 auto;padding:0 2rem}
+  section{padding:5rem 0}
+  section+section{border-top:1px solid var(--line)}
+
+  #hero{padding:7rem 0 5rem}
+  .hero-grid{display:grid;grid-template-columns:1fr 380px;gap:4rem;align-items:center}
+  .hero-eyebrow{font-size:.8rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:1.2rem}
+  .hero-name{font-family:var(--serif);font-size:clamp(2.8rem,5vw,4.2rem);line-height:1.08;letter-spacing:-.02em;color:var(--ink);margin-bottom:1.2rem}
+  .hero-name em{font-style:italic;color:var(--ink2)}
+  .hero-bio{font-size:1.05rem;color:var(--ink2);line-height:1.75;max-width:480px;margin-bottom:2rem}
+  .hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:.45rem;padding:.7rem 1.4rem;border-radius:4px;font-family:var(--sans);font-size:.88rem;font-weight:500;cursor:pointer;text-decoration:none;transition:all .2s}
+  .btn-primary{background:var(--ink);color:#fff;border:1px solid var(--ink)}
+  .btn-primary:hover{background:#333}
+  .btn-outline{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .btn-outline:hover{border-color:var(--ink2)}
+  .hero-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:2rem;display:flex;flex-direction:column;gap:1.2rem}
+  .stat-row{display:flex;justify-content:space-between;align-items:flex-end;padding-bottom:1.2rem;border-bottom:1px solid var(--line)}
+  .stat{display:flex;flex-direction:column}
+  .stat-num{font-family:var(--serif);font-size:2rem;line-height:1;color:var(--ink)}
+  .stat-label{font-size:.78rem;color:var(--ink3);font-weight:500;letter-spacing:.04em;text-transform:uppercase;margin-top:.2rem}
+  .stack-tags{display:flex;flex-wrap:wrap;gap:.5rem}
+  .tag{font-size:.78rem;font-weight:500;background:var(--tag-bg);color:var(--tag-ink);padding:.3rem .75rem;border-radius:3px;letter-spacing:.02em}
+  .avail-row{display:flex;align-items:center;gap:.6rem;font-size:.85rem;color:var(--ink2)}
+  .dot{width:8px;height:8px;border-radius:50%;background:#22c55e;flex-shrink:0}
+
+  .section-header{display:flex;align-items:baseline;gap:1.5rem;margin-bottom:3rem}
+  .section-num{font-size:.8rem;font-weight:500;color:var(--ink3);letter-spacing:.1em}
+  .section-title{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.2rem);letter-spacing:-.02em}
+  .section-line{flex:1;height:1px;background:var(--line)}
+
+  .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+  .project-card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1.75rem;display:flex;flex-direction:column;gap:1rem;transition:border-color .2s,transform .2s}
+  .project-card:hover{border-color:#bbb;transform:translateY(-2px)}
+  .project-header{display:flex;justify-content:space-between;align-items:flex-start}
+  .project-icon{width:40px;height:40px;border-radius:8px;background:var(--tag-bg);display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+  .project-links{display:flex;gap:.5rem}
+  .icon-btn{width:32px;height:32px;border-radius:6px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;cursor:pointer;background:transparent;color:var(--ink2);font-size:.9rem;text-decoration:none;transition:border-color .2s,color .2s}
+  .icon-btn:hover{border-color:var(--ink2);color:var(--ink)}
+  .project-title{font-family:var(--serif);font-size:1.2rem;letter-spacing:-.01em;color:var(--ink)}
+  .project-desc{font-size:.9rem;color:var(--ink2);line-height:1.65;flex:1}
+  .project-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+  .project-tags .tag{font-size:.72rem}
+
+  .exp-list{display:flex;flex-direction:column;gap:0}
+  .exp-item{display:grid;grid-template-columns:160px 1fr;gap:2rem;padding:2rem 0;border-bottom:1px solid var(--line)}
+  .exp-item:first-child{padding-top:0}
+  .exp-meta{display:flex;flex-direction:column;gap:.3rem;padding-top:.2rem}
+  .exp-period{font-size:.8rem;font-weight:500;color:var(--ink3);letter-spacing:.04em}
+  .exp-company-badge{display:inline-block;font-size:.78rem;background:var(--tag-bg);color:var(--tag-ink);padding:.2rem .6rem;border-radius:3px;font-weight:500;margin-top:.3rem;width:fit-content}
+  .exp-role{font-family:var(--serif);font-size:1.25rem;letter-spacing:-.01em;margin-bottom:.5rem}
+  .exp-desc{font-size:.9rem;color:var(--ink2);line-height:1.65;margin-bottom:.8rem}
+  .exp-highlights{list-style:none;display:flex;flex-direction:column;gap:.35rem}
+  .exp-highlights li{font-size:.88rem;color:var(--ink2);padding-left:1.2rem;position:relative}
+  .exp-highlights li::before{content:"→";position:absolute;left:0;color:var(--ink3);font-size:.85rem}
+
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem}
+  .skill-group{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1.5rem}
+  .skill-group-title{font-size:.75rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:1rem}
+  .skill-items{display:flex;flex-direction:column;gap:.6rem}
+  .skill-row{display:flex;flex-direction:column;gap:.3rem}
+  .skill-name{font-size:.88rem;font-weight:500;color:var(--ink)}
+  .skill-bar-bg{height:3px;background:var(--line);border-radius:2px;overflow:hidden}
+  .skill-bar{height:3px;background:var(--ink);border-radius:2px}
+
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+  .contact-intro{font-family:var(--serif);font-size:1.6rem;line-height:1.3;letter-spacing:-.01em;margin-bottom:1.2rem}
+  .contact-sub{font-size:.95rem;color:var(--ink2);line-height:1.7;margin-bottom:2rem}
+  .contact-links{display:flex;flex-direction:column;gap:.8rem}
+  .contact-link{display:flex;align-items:center;gap:.75rem;font-size:.9rem;color:var(--ink2);text-decoration:none;transition:color .2s}
+  .contact-link:hover{color:var(--ink)}
+  .contact-link-icon{width:36px;height:36px;border:1px solid var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;color:var(--ink2)}
+  .cv-box{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:2rem;display:flex;flex-direction:column;gap:1.5rem}
+  .cv-box-title{font-family:var(--serif);font-size:1.3rem;letter-spacing:-.01em}
+  .cv-box-desc{font-size:.88rem;color:var(--ink2);line-height:1.65}
+  .cv-preview{background:var(--tag-bg);border-radius:8px;padding:1.5rem;display:flex;flex-direction:column;gap:.5rem}
+  .cv-preview-row{display:flex;justify-content:space-between;font-size:.82rem}
+  .cv-preview-label{color:var(--ink3);font-weight:500}
+  .cv-preview-val{color:var(--ink2)}
+
+  footer{border-top:1px solid var(--line);padding:2rem 0}
+  .footer-inner{max-width:1100px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center}
+  .footer-copy{font-size:.8rem;color:var(--ink3)}
+  .footer-logo{font-family:var(--serif);font-size:.95rem;color:var(--ink2)}
+
+  @media(max-width:768px){
+    .hero-grid,.contact-grid{grid-template-columns:1fr}
+    .exp-item{grid-template-columns:1fr;gap:.75rem}
+    .hero-card{display:none}
+    .nav-links{gap:1rem}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#hero">SK</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div id="about">
+        <p class="hero-eyebrow">Data Engineer · Open to Opportunities</p>
+        <h1 class="hero-name">Shivam<br><em>Keshri</em></h1>
+        <p class="hero-bio">I build robust data pipelines and scalable infrastructure that turns raw, messy data into reliable insights. Specialising in distributed processing, workflow orchestration, and modern data stack tooling.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#projects">View Projects</a>
+          <a class="btn btn-outline" href="#contact">Download CV</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="stat-row">
+          <div class="stat"><span class="stat-num">3+</span><span class="stat-label">Years Exp.</span></div>
+          <div class="stat"><span class="stat-num">15+</span><span class="stat-label">Pipelines Built</span></div>
+          <div class="stat"><span class="stat-num">TB+</span><span class="stat-label">Data Processed</span></div>
+        </div>
+        <div>
+          <p style="font-size:.78rem;font-weight:500;color:var(--ink3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.7rem">Core Stack</p>
+          <div class="stack-tags">
+            <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Apache Spark</span>
+            <span class="tag">Airflow</span><span class="tag">dbt</span><span class="tag">Kafka</span><span class="tag">AWS</span>
+          </div>
+        </div>
+        <div class="avail-row"><span class="dot"></span><span>Available for new roles</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Projects</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-icon">⚡</div>
+          <div class="project-links">
+            <a class="icon-btn" href="https://github.com/shivamkeshri" title="GitHub">⌥</a>
+            <a class="icon-btn" href="#" title="Live">↗</a>
+          </div>
+        </div>
+        <div class="project-title">Real-Time Event Pipeline</div>
+        <p class="project-desc">End-to-end streaming pipeline ingesting 50M+ events/day using Kafka and Spark Structured Streaming, with dbt transformations and Airflow orchestration. Reduced latency from 6h to 4min.</p>
+        <div class="project-tags">
+          <span class="tag">Kafka</span><span class="tag">Spark</span><span class="tag">dbt</span><span class="tag">Airflow</span><span class="tag">PostgreSQL</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-icon">🏗</div>
+          <div class="project-links">
+            <a class="icon-btn" href="https://github.com/shivamkeshri" title="GitHub">⌥</a>
+            <a class="icon-btn" href="#" title="Live">↗</a>
+          </div>
+        </div>
+        <div class="project-title">Data Lakehouse on AWS</div>
+        <p class="project-desc">Designed and implemented a lakehouse architecture using S3, Glue, and Athena. Replaced legacy DWH — cut query costs by 60% and improved data freshness to near real-time.</p>
+        <div class="project-tags">
+          <span class="tag">AWS S3</span><span class="tag">Glue</span><span class="tag">Athena</span><span class="tag">Python</span><span class="tag">Terraform</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-icon">🔁</div>
+          <div class="project-links">
+            <a class="icon-btn" href="https://github.com/shivamkeshri" title="GitHub">⌥</a>
+            <a class="icon-btn" href="#" title="Live">↗</a>
+          </div>
+        </div>
+        <div class="project-title">dbt Data Mart Framework</div>
+        <p class="project-desc">Built a modular dbt project (300+ models) covering staging, intermediate, and mart layers. Introduced testing, documentation, and CI/CD using GitHub Actions.</p>
+        <div class="project-tags">
+          <span class="tag">dbt</span><span class="tag">Snowflake</span><span class="tag">SQL</span><span class="tag">GitHub Actions</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Experience</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="exp-list">
+      <div class="exp-item">
+        <div class="exp-meta">
+          <span class="exp-period">2023 — Present</span>
+          <span class="exp-company-badge">Company Name</span>
+        </div>
+        <div class="exp-body">
+          <div class="exp-role">Senior Data Engineer</div>
+          <p class="exp-desc">Leading the data platform team, architecting pipelines and lakehouse infrastructure for analytics at scale.</p>
+          <ul class="exp-highlights">
+            <li>Migrated legacy ETL to Airflow + dbt, reducing failures by 80%</li>
+            <li>Designed streaming ingestion layer processing 50M events/day</li>
+            <li>Mentored 2 junior engineers; established code review practices</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-meta">
+          <span class="exp-period">2021 — 2023</span>
+          <span class="exp-company-badge">Previous Company</span>
+        </div>
+        <div class="exp-body">
+          <div class="exp-role">Data Engineer</div>
+          <p class="exp-desc">Built and maintained data pipelines for marketing and product analytics teams.</p>
+          <ul class="exp-highlights">
+            <li>Developed PySpark jobs processing 2TB+ of raw log data daily</li>
+            <li>Implemented data quality checks reducing downstream report errors by 40%</li>
+            <li>Integrated 10+ external data sources into the central warehouse</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-meta">
+          <span class="exp-period">2020 — 2021</span>
+          <span class="exp-company-badge">Internship</span>
+        </div>
+        <div class="exp-body">
+          <div class="exp-role">Data Engineering Intern</div>
+          <p class="exp-desc">Assisted in building ETL pipelines and performing data validation for reporting dashboards.</p>
+          <ul class="exp-highlights">
+            <li>Automated manual reporting workflows, saving 8 hours/week</li>
+            <li>Wrote SQL stored procedures for aggregated business KPIs</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Skills</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">Languages</div>
+        <div class="skill-items">
+          <div class="skill-row"><div class="skill-name">Python</div><div class="skill-bar-bg"><div class="skill-bar" style="width:95%"></div></div></div>
+          <div class="skill-row"><div class="skill-name">SQL</div><div class="skill-bar-bg"><div class="skill-bar" style="width:90%"></div></div></div>
+          <div class="skill-row"><div class="skill-name">Bash / Shell</div><div class="skill-bar-bg"><div class="skill-bar" style="width:70%"></div></div></div>
+          <div class="skill-row"><div class="skill-name">Scala</div><div class="skill-bar-bg"><div class="skill-bar" style="width:55%"></div></div></div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Data Processing</div>
+        <div class="skill-items">
+          <div class="skill-row"><div class="skill-name">Apache Spark</div><div class="skill-bar-bg"><div class="skill-bar" style="width:90%"></div></div></div>
+          <div class="skill-row"><div class="skill-name">Apache Kafka</div><div class="skill-bar-bg"><div class="skill-bar" style="width:75%"></div></div></div>
+          <div class="skill-row"><div class="skill-name">Airflow</div><div class="skill-bar-bg"><div class="skill-bar" style="width:88%"></div></div></div>
+          <div class="skill-row"><div class="skill-name">dbt</div><div class="skill-bar-bg"><div class="skill-bar" style="width:85%"></div></div></div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Cloud & Infra</div>
+        <div class="skill-items">
+          <div class="skill-row"><div class="skill-name">AWS (S3, Glue, Athena)</div><div class="skill-bar-bg"><div class="skill-bar" style="width:82%"></div></div></div>
+          <div class="skill-row"><div class="skill-name">Docker / Kubernetes</div><div class="skill-bar-bg"><div class="skill-bar" style="width:70%"></div></div></div>
+          <div class="skill-row"><div class="skill-name">Terraform</div><div class="skill-bar-bg"><div class="skill-bar" style="width:65%"></div></div></div>
+          <div class="skill-row"><div class="skill-name">GitHub Actions / CI</div><div class="skill-bar-bg"><div class="skill-bar" style="width:78%"></div></div></div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Databases</div>
+        <div class="skill-items">
+          <div class="skill-row"><div class="skill-name">Snowflake</div><div class="skill-bar-bg"><div class="skill-bar" style="width:80%"></div></div></div>
+          <div class="skill-row"><div class="skill-name">PostgreSQL</div><div class="skill-bar-bg"><div class="skill-bar" style="width:88%"></div></div></div>
+          <div class="skill-row"><div class="skill-name">BigQuery</div><div class="skill-bar-bg"><div class="skill-bar" style="width:72%"></div></div></div>
+          <div class="skill-row"><div class="skill-name">Redis</div><div class="skill-bar-bg"><div class="skill-bar" style="width:60%"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Contact</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <p class="contact-intro">Let's build something great together.</p>
+        <p class="contact-sub">I'm open to full-time roles, freelance data projects, and interesting collaborations. Drop me a message or connect on LinkedIn.</p>
+        <div class="contact-links">
+          <a class="contact-link" href="mailto:shivam@example.com">
+            <div class="contact-link-icon">✉</div>
+            shivam@example.com
+          </a>
+          <a class="contact-link" href="https://linkedin.com/in/shivamkeshri" target="_blank">
+            <div class="contact-link-icon">in</div>
+            linkedin.com/in/shivamkeshri
+          </a>
+          <a class="contact-link" href="https://github.com/shivamkeshri" target="_blank">
+            <div class="contact-link-icon">⌥</div>
+            github.com/shivamkeshri
+          </a>
+        </div>
+      </div>
+      <div class="cv-box">
+        <div class="cv-box-title">Curriculum Vitae</div>
+        <p class="cv-box-desc">Download my full CV with detailed work history, education, certifications, and references.</p>
+        <div class="cv-preview">
+          <div class="cv-preview-row"><span class="cv-preview-label">Name</span><span class="cv-preview-val">Shivam Keshri</span></div>
+          <div class="cv-preview-row"><span class="cv-preview-label">Role</span><span class="cv-preview-val">Data Engineer</span></div>
+          <div class="cv-preview-row"><span class="cv-preview-label">Experience</span><span class="cv-preview-val">3+ Years</span></div>
+          <div class="cv-preview-row"><span class="cv-preview-label">Format</span><span class="cv-preview-val">PDF · 1 page</span></div>
+        </div>
+        <a class="btn btn-primary" href="/cv.pdf" style="justify-content:center">↓ Download CV (PDF)</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-logo">Shivam Keshri</span>
+    <span class="footer-copy">© 2025 · Built with care</span>
+  </div>
+</footer>
+
+</body>
+</html>
